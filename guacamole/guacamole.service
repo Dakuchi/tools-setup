@@ -1,0 +1,15 @@
+# /etc/systemd/system/guacamole.service
+[Unit]
+Description=My Guacamole Compose App
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=unless-stopped
+User=jayce
+WorkingDirectory=/home/jayce/tools-setup/guacamole
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+
+[Install]
+WantedBy=multi-user.target

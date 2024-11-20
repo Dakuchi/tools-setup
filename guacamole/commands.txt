@@ -1,0 +1,6 @@
+docker exec -it guac-sql bash
+bash# mysql -u root -p
+mysql> CREATE DATABASE guacamole_db;
+mysql> CREATE USER 'guacamole_user'@'%' IDENTIFIED BY 'my_passwd';
+mysql> GRANT ALL PRIVILEGES ON guacamole_db.* TO 'guacamole_user'@'%';
+mysql> FLUSH PRIVILEGES;
