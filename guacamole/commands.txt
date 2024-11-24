@@ -4,3 +4,11 @@ mysql> CREATE DATABASE guacamole_db;
 mysql> CREATE USER 'guacamole_user'@'%' IDENTIFIED BY 'my_passwd';
 mysql> GRANT ALL PRIVILEGES ON guacamole_db.* TO 'guacamole_user'@'%';
 mysql> FLUSH PRIVILEGES;
+
+docker exec -it guac_web /opt/guacamole/bin/initdb.sh --mysql > initdb.sql
+docker cp ./initdb.sql guac-sql:/initdb.sql
+
+docker exec -it guac-sql bash
+bash# mysql -u root -p
+mysql> use guacamole_db;
+mysql> source ./initdb.sql
